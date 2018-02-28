@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="form.php" method="post">
+    <label for="names">
+        <span>姓名：</span><input type="text" id="names" name="names">
+    </label>
+    <br>
+    <label for="age">
+        <span>年龄：</span>
+        <select name="age" id="age">
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+        </select>
+    </label>
+    <br>
+    <label for="sex">
+        <span id="sex">性别</span>
+        <input type="checkbox" name="sex" value="man">男
+        <input type="checkbox" name="sex" value="woman">女
+    </label>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

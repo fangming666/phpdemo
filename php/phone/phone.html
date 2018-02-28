@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Title</title>
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<input type="file" id="fileS" name="file" accept="image/*">
+<button>提交</button>
+</body>
+<script>
+    $(() => {
+        $("button").click(() => {
+            let formdata = new FormData();
+            formdata.append('file', $("#fileS")[0].files[0]);
+            $.ajax({
+                    url: "./file_updata.php",
+                    type: "post",
+                    data: formdata,
+                    contentType: false,
+                    processData: false,
+                    mimeType: "multipart/form-data",
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (error) {
+                        console.log("error", error)
+                    }
+                }
+            )
+        })
+    })
+</script>
+</html>

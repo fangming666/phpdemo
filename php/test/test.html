@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .test-btn{
+            outline: none;
+            color: #3A3A3A;
+            background-color: #fff;
+            border:1px solid #ccc;
+            display: inline-block;
+            font-weight: normal;
+            line-height: 1.25;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        .test-btn>img{
+            display: none;
+            position: absolute;
+            right: -11px;
+            top:-6px;
+        }
+        .test-btn-active{
+            border-color: #0C72F9!important;
+            color: #0c72f9 !important;
+        }
+        .test-btn-active>img{
+            display: block!important;
+        }
+    </style>
+</head>
+<body>
+
+<button class="test-btn">商品购买<img src="yes.png" /></button>
+
+</body>
+<script src="http://g.ydbcdn.com/jquery/latest/jquery.min.js"></script>
+<script>
+   $(() =>{
+       $(".test-btn").on("click",(e) =>{
+           $(e.target).toggleClass("test-btn-active")
+       })
+   })
+</script>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>进阶</title>
+</head>
+<body>
+<div id="app">
+
+    <p class="texts">
+        <!-------这是一个注释----->
+        hello World
+    </p>
+    <span>123</span>
+    <a href="#" name="local">点击进行跳转</a>
+    <button class="clear">清除剪切板的内容</button>
+    <button class="get">获取剪切板的内容</button>
+    <button class="set">设置剪切板的内容</button>
+    <b class="copyData"></b>
+</div>
+<form action="www.baidu.com" method="post">
+    <input type="text" name="text"/>
+    <button class="btn">点击啊</button>
+    <input type="checkbox" name="choose"/>
+</form>
+</body>
+<script src="http://static.mschool.cn/jquery/latest/jquery.min.js"></script>
+<Script>
+    /**********1.with语句**********/
+    let Obj = {name: "fangMIng", age: "18"};
+    with (Obj) {
+        let names = name;
+        let ages = age;
+        console.log(names, ages);
+    }
+
+
+    /***2.label**/
+    let num = 0;
+    out:
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 8; j++) {
+                if (i == 5 && j == 4) {
+                    break out; //此时会跳出整个循环
+                }
+                num++
+            }
+        }
+    console.log(num);
+
+
+    /***迭代器**/
+    let arr1 = [1, 2, 3, 4, 5];
+    //1.every
+    let arrResult1 = arr1.every(function (item, index, array) {
+        return (item > 2);
+    });
+    console.log(arrResult1);  //返回的是false，every指代的是全部符合
+
+    //2.some
+    let arrResult2 = arr1.some(function (item, index, array) {
+        return (item > 2);
+    });
+    console.log(arrResult2); //返回的是true，部分符合即可
+
+    //3.filter
+    let arrResult3 = arr1.filter(function (item, index, array) {
+        return (item > 2)
+    });
+    console.log(arrResult3); //会返回数组中大于2的数值
+
+    //.map
+    let arrResult4 = arr1.map(function (item, index, array) {
+        return item * 2
+    });
+    console.log(arrResult4); //会返回数组计算以后的结果
+
+    /**数组的reduce和reduceRight**/
+    let sum = arr1.reduce(function (prev, cur, index, array) {
+        return prev + cur;
+    });
+    console.log(sum); //返回15，第一次循环prev指的是1，cur指代的是2，第二次prev指代的是上次的1+2,cur指代的3
+    //reduceRight是从后往前进行操作
+
+
+    /**bind:会绑定this的值**/
+    let co = {color: "red"};
+
+    function colorInfo() {
+        console.log(this.color)
+    }
+
+    let color_info = colorInfo.bind(co); //此时已经吧函数李阿敏的this改为了co的this
+    color_info();
+
+
+    /****number****/
+    let num2 = 10;
+    let num3 = 10.005;
+    console.log(num2.toFixed(2)); //会返回10.00；
+    console.log(num3.toFixed(2)); //会返回10.01
+</Script>
+
+<script>
+    $(function () {
+        /******************dom**************/
+            //确定是不是文档中的一个元素
+        let app = document.getElementById("app");
+        if (document.getElementById("app").nodeType == 1) {
+            console.log("Node is an element");
+            let value = document.getElementById("app").nodeName;
+            console.log(value);
+            let firstChild = app.childNodes[0];
+            let secondChild = app.childNodes.item(1);
+            let count = app.childNodes.length;
+            console.log(firstChild, secondChild, count);
+        }
+
+        //文档的信息
+        let originTitle = document.title; //取得文档的标题
+        console.log(originTitle);
+        document.title = "new title"; //设置文档的标题
+        let originTitle2 = document.title;
+        console.log(originTitle2);
+        let url = document.URL; //取得完整的URL
+        console.log(url);
+        let domain = document.domain; //取得域名
+        console.log(domain);
+        let referrer = document.referrer;//取得来源页面的url
+        console.log(referrer);
+        console.log(document.anchors);//取得文档中有name的a标签
+        console.log(document.forms);//取得表单中所有的元素
+        console.log(app.tagName.toLocaleLowerCase());//取得元素的名称，返回DIV
+        let comment = app.firstChild;
+        console.log(comment.data);//取得节点中的注释信息
+        console.log(document.querySelector("#app"));
+
+
+        //修改键
+        app.onclcik = (e) => {
+            let arr = [];
+            if (e.shiftKey) {
+                arr.push("shift")
+            }
+            if (e.ctrlKey) {
+                arr.push("ctrl")
+            }
+            if (e.altKey) {
+                arr.push("alt")
+            }
+            if (e.metaKey) {
+                arr.push("meta")
+            }
+            console.log(arr)
+        };
+
+        //鼠标事件
+//        function getButton(event) {
+//            if (document.implementation.hasFeature("MouseEvents", "2.0")) {
+//                return event.button;
+//            } else {
+//                switch (event.button) {
+//                    case 0:
+//                        console.log(0);
+//                        break;
+//                    case 1:
+//                        console.log(1);
+//                        break;
+//                    case 2:
+//                        console.log(2);
+//                        break;
+//                    case 3:
+//                        console.log(3);
+//                        break;
+//                    case 4:
+//                        console.log(4);
+//                        break;
+//                    case 5:
+//                        console.log(5);
+//                        break;
+//                    case 6:
+//                        console.log(6);
+//                        break;
+//                    case 7:
+//                        console.log(7);
+//                        break;
+//                }
+//            }
+//        }
+//
+//        getButton();
+
+        //设备事件
+        //orientationchange，移动设备横屏竖屏
+        console.log(window.orientation);
+        console.log(document.queryCommandSupported('copy'));
+
+        //绑定在了body上，也可以绑定在其他可用元素行，但是不是所有元素都支持copy和past事件。
+        $(document.body).bind({
+            copy: function (e) {//copy事件
+                let cpTxt = "复制的数据";
+                let clipboardData = window.clipboardData; //for IE
+                if (!clipboardData) { // for chrome
+                    clipboardData = e.originalEvent.clipboardData;
+                }
+                let result = clipboardData.getData("text") + ":" + cpTxt;
+                //e.clipboardData.getData('text');//可以获取用户选中复制的数据
+                clipboardData.setData('Text', result);
+                $('.copyData').text(result);
+                return false;//否则设不生效
+            }
+        });
+
+
+        //错误处理
+        function handle() {
+            let num2 = 10;
+            try {
+                10 < 9;
+                console.log("this is try")
+            } catch (error) {
+                console.log("this is an error");
+            } finally {
+                console.log(`the num is ${num2}`);
+            }
+
+        }
+
+        handle();
+
+
+        //*************json***********//
+        //序列化处理JSON.stringify
+        let Obj2 = {
+            "title":"yuanDingBang",
+            "authors":["fangMing"],
+            "year":2017
+        };
+        let jsonText =JSON.stringify(Obj2,["title","year"]);
+        console.log(jsonText);
+
+    });
+</script>
+</html>
